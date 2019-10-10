@@ -1,0 +1,38 @@
+{
+  "name": "most-stared-github-repo",
+  "version": "1.0.0",
+  "description": "List most stared github repo",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/napatwongchr/most-stared-github-repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/napatwongchr/most-stared-github-repo/issues"
+  },
+  "homepage": "https://github.com/napatwongchr/most-stared-github-repo#readme",
+  "devDependencies": {
+    "@testing-library/react": "^9.3.0",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.1.2",
+    "jest": "^24.9.0",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "emotion": "^10.0.17",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  }
+}
