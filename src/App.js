@@ -1,5 +1,6 @@
 import React from "react";
 import { css } from "emotion";
+import RepositoryList from "./RepositoryList";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       >
         Most starred github repositories in 30 days
       </h1>
+      <RepositoryList />
     </div>
   );
 }
