@@ -39,10 +39,10 @@ function RepositoryList() {
     runLoadMoreRepository(pageCount);
   }, [isLoadMore, pageCount, runLoadMoreRepository]);
 
-  function handleScroll() {
+  function handleScroll(event) {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
-      document.documentElement.offsetHeight
+      window.innerHeight + event.target.scrollingElement.scrollTop !==
+      event.target.scrollingElement.offsetHeight
     ) {
       return;
     }
@@ -60,14 +60,14 @@ function RepositoryList() {
   }
 
   return (
-    <div data-testid="repository-list" className={styles.repoListContainer}>
+    <div className={styles.repoListContainer} data-testid="repository-list">
       {repositories ? (
         repositories.items.map(repository => {
           return (
             <div
               key={repository.id}
-              data-testid="repository-item"
               className={styles.repoItemContainer}
+              data-testid="repository-item"
               onClick={() => window.open(repository.html_url)}
             >
               <div className={styles.repoHeadingContainer}>
@@ -82,11 +82,11 @@ function RepositoryList() {
                 <div className={styles.repoStatsContainer}>
                   <div className={styles.starsCountContianer}>
                     <span className={styles.starsCountText}>Stars:</span>{" "}
-                    {repository.stargazers_count}
+                    <span>{repository.stargazers_count}</span>
                   </div>
                   <div className={styles.forksCountContainer}>
                     <span className={styles.forksCountText}>Forks: </span>
-                    {repository.forks_count}
+                    <span>{repository.forks_count}</span>
                   </div>
                 </div>
               </div>
@@ -97,7 +97,7 @@ function RepositoryList() {
           );
         })
       ) : (
-        <div>No repositories</div>
+        <div data-testid="no-repository">No repositories</div>
       )}
       {isLoadMoreLoading && (
         <div className={styles.loadMoreRepositoryContainer}>

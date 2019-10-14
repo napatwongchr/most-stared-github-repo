@@ -1,14 +1,12 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import App from "../App";
 
-test("App should contains page heading text", () => {
-  const testMessage = "Most starred github repositories in 30 days";
-  const { queryByText } = render(<App />);
-  expect(queryByText(testMessage)).toBeInTheDocument();
-});
+afterEach(cleanup);
 
-test("App should contains repository list", () => {
+test("App should contains page heading text", () => {
   const { getByTestId } = render(<App />);
-  expect(getByTestId("repository-list")).toBeInTheDocument();
+  expect(getByTestId("app-heading")).toHaveTextContent(
+    /most starred github repositories in 30 days/i
+  );
 });

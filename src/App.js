@@ -5,7 +5,7 @@ import RepositoryList from "./components/RepositoryList";
 function App() {
   return (
     <div className={styles.appContainer}>
-      <h1 className={styles.appHeading}>
+      <h1 className={styles.appHeading} data-testid="app-heading">
         Most{" "}
         <span className={styles.hightlightText}>
           &nbsp;starred github&nbsp;
