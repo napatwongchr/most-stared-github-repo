@@ -4,9 +4,13 @@
   "description": "List most stared github repo",
   "main": "index.js",
   "scripts": {
+    "clear-build-cache": "rm -rf .cache/ dist/",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "parcel index.html",
+    "build": "npm run clear-build-cache && parcel build index.html --public-url ./",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -22,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/napatwongchr/most-stared-github-repo/issues"
   },
-  "homepage": "https://github.com/napatwongchr/most-stared-github-repo#readme",
+  "homepage": "https://napatwongchr.github.io/most-stared-github-repo/",
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-transform-runtime": "^7.6.2",
@@ -44,6 +48,7 @@
     "@babel/runtime": "^7.6.3",
     "axios": "^0.19.0",
     "emotion": "^10.0.17",
+    "gh-pages": "^2.1.1",
     "react": "^16.10.2",
     "react-async": "^9.0.0",
     "react-dom": "^16.10.2",
