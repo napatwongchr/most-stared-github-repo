@@ -112,7 +112,11 @@ const SEARCH_PARAMS = {
   order: "desc",
   page: 1,
   perPage: 10,
-  query: "created:>2019-09-12",
+  query: `created:>${
+    new Date(new Date().setMonth(new Date().getMonth() - 1))
+      .toISOString()
+      .split("T")[0]
+  }`,
   sort: "stars"
 };
 
