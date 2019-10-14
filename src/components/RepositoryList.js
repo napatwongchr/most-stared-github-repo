@@ -71,7 +71,7 @@ function RepositoryList() {
               onClick={() => window.open(repository.html_url)}
             >
               <div className={styles.repoHeadingContainer}>
-                <div>
+                <div className={styles.repoHeadingContent}>
                   <span className={styles.repoName}>{repository.name}</span>
                   {repository.language && (
                     <span className={styles.repoLanguageTag}>
@@ -185,10 +185,24 @@ const styles = {
   repoHeadingContainer: css`
     display: flex;
     justify-content: space-between;
+    @media (max-width: 576px) {
+      display: flex;
+      flex-direction: column;
+    }
+  `,
+  repoHeadingContent: css`
+    @media (max-width: 576px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   `,
   repoName: css`
     font-weight: bold;
     font-size: 22px;
+    @media (max-width: 576px) {
+      text-align: center;
+    }
   `,
   repoLanguageTag: css`
     background-color: #745eb5;
@@ -196,10 +210,17 @@ const styles = {
     margin-left: 5px;
     border-radius: 6px;
     color: #ffffff;
+    @media (max-width: 576px) {
+      margin-top: 20px;
+    }
   `,
   repoStatsContainer: css`
     label: stats;
     display: flex;
+    @media (max-width: 576px) {
+      justify-content: center;
+      margin-top: 30px;
+    }
   `,
   starsCountContianer: css`
     label: starCount;
@@ -217,6 +238,9 @@ const styles = {
   repoDescContainer: css`
     label: description;
     margin-top: 30px;
+    @media (max-width: 576px) {
+      text-align: center;
+    }
   `,
   loadMoreRepositoryContainer: css`
     display: flex;
