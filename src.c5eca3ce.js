@@ -134,4 +134,4 @@ module.exports=require("./lib/axios");
 },{"@babel/runtime/helpers/taggedTemplateLiteral":"IObo","react":"HdMw","emotion":"YhBu","./components/RepositoryList":"a34P"}],"H99C":[function(require,module,exports) {
 "use strict";var e=l(require("@babel/runtime/helpers/taggedTemplateLiteral")),r=l(require("react")),n=l(require("react-dom")),t=require("emotion"),u=l(require("./App"));function l(e){return e&&e.__esModule?e:{default:e}}function o(){var r=(0,e.default)(['\n  * {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n  }\n  body {\n    font-size: 18px;\n    background-color: #F1F3F5;\n    font-family: Arvo, "serif";\n    color: #262626;\n  }\n']);return o=function(){return r},r}(0,t.injectGlobal)(o()),n.default.render(r.default.createElement(r.default.StrictMode,null,r.default.createElement(u.default,null)),document.getElementById("root"));
 },{"@babel/runtime/helpers/taggedTemplateLiteral":"IObo","react":"HdMw","react-dom":"X9zx","emotion":"YhBu","./App":"FLHj"}]},{},["H99C"], null)
-//# sourceMappingURL=/src.c5eca3ce.js.map
+//# sourceMappingURL=src.c5eca3ce.js.map
