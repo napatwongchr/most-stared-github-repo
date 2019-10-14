@@ -4,8 +4,13 @@
   "description": "List most stared github repo",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "dev": "parcel index.html",
     "test": "jest",
-    "dev": "parcel index.html"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:update": "jest --u"
   },
   "repository": {
     "type": "git",
@@ -19,7 +24,13 @@
   },
   "homepage": "https://github.com/napatwongchr/most-stared-github-repo#readme",
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@testing-library/jest-dom": "^4.1.2",
     "@testing-library/react": "^9.3.0",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
@@ -30,9 +41,23 @@
     "prettier": "^1.18.2"
   },
   "dependencies": {
+    "@babel/runtime": "^7.6.3",
     "axios": "^0.19.0",
     "emotion": "^10.0.17",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
-  }
+    "react-async": "^9.0.0",
+    "react-dom": "^16.10.2",
+    "uuid": "^3.3.3"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 Firefox versions",
+    "last 2 FirefoxAndroid versions",
+    "last 2 Safari versions",
+    "last 2 iOS versions",
+    "last 2 Edge versions",
+    "last 2 Opera versions",
+    "last 2 OperaMobile versions"
+  ]
 }
