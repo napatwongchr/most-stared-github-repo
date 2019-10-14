@@ -12,7 +12,8 @@ ReactDOM.render(
           padding: 0,
           fontSize: "18px",
           backgroundColor: "#F1F3F5",
-          fontFamily: "Arvo, serif"
+          fontFamily: "Arvo, serif",
+          color: "#262626"
         }
       }}
     />

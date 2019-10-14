@@ -97,7 +97,12 @@ function RepositoryList() {
           );
         })
       ) : (
-        <div data-testid="no-repository">No repositories</div>
+        <div
+          className={styles.noRepositoryContainer}
+          data-testid="no-repository"
+        >
+          No repositories.
+        </div>
       )}
       {isLoadMoreLoading && (
         <div className={styles.loadMoreRepositoryContainer}>
@@ -166,10 +171,19 @@ const animation = {
 
 const styles = {
   spinnerContainer: css`
-    font-size: 42px;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
   `,
   errorContainer: css`
-    font-size: 42px;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+  `,
+  noRepositoryContainer: css`
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
   `,
   repoListContainer: css`
     label: repoList;
