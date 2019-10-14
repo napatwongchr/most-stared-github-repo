@@ -1,13 +1,7 @@
 import axios from "axios";
 
-export function searchRepository({ order, page, perPage, createdAt, sort }) {
+export function searchRepository({ order, page, perPage, query, sort }) {
   return axios.get(
-    `https://api.github.com/search/repositories?q=created:>${createdAt}&sort=${sort}&order=${order}&page=${page}&per_page=${perPage}`,
-    {
-      auth: {
-        username: "napatwongchr",
-        password: "xJ3a8k8f2810023"
-      }
-    }
+    `https://api.github.com/search/repositories?q=${query}&sort=${sort}&order=${order}&page=${page}&per_page=${perPage}`
   );
 }

@@ -8,21 +8,25 @@ function RepositoryList() {
   const [isLoadMore, setIsLoadMore] = useState(false);
   const [repositories, setRepositories] = useState(null);
 
-  const { isLoading: isInitialLoading } = useAsync({
-    promiseFn: initRepository,
-    setRepositories,
-    setPageCount,
-    page: pageCount
-  });
-
-  const { isLoading: isLoadMoreLoading, run: runLoadMoreRepository } = useAsync(
+  const { isLoading: isInitializeLoading, error: isInitializeError } = useAsync(
     {
-      deferFn: loadMoreRepository,
-      setPageCount,
+      promiseFn: initRepository,
       setRepositories,
-      setIsLoadMore
+      setPageCount,
+      page: pageCount
     }
   );
+
+  const {
+    isLoading: isLoadMoreLoading,
+    error: isLoadMoreError,
+    run: runLoadMoreRepository
+  } = useAsync({
+    deferFn: loadMoreRepository,
+    setPageCount,
+    setRepositories,
+    setIsLoadMore
+  });
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -44,8 +48,14 @@ function RepositoryList() {
     setIsLoadMore(true);
   }
 
-  if (isInitialLoading) {
+  if (isInitializeLoading) {
     return <div className={styles.spinnerContainer}>Loading ...</div>;
+  }
+
+  if (isInitializeError || isLoadMoreError) {
+    return (
+      <div className={styles.errorContainer}>Error fetching repositories.</div>
+    );
   }
 
   return (
@@ -86,14 +96,16 @@ function RepositoryList() {
   );
 }
 
+const SEARCH_PARAMS = {
+  order: "desc",
+  page: 1,
+  perPage: 10,
+  query: "created:>2019-09-12",
+  sort: "stars"
+};
+
 async function initRepository({ setRepositories, setPageCount, page }) {
-  const response = await api.searchRepository({
-    order: "desc",
-    page: 1,
-    perPage: 10,
-    createdAt: "2019-09-12",
-    sort: "stars"
-  });
+  const response = await api.searchRepository(SEARCH_PARAMS);
   setRepositories(response.data);
   setPageCount(page + 1);
 }
@@ -103,11 +115,8 @@ async function loadMoreRepository(
   { setPageCount, setIsLoadMore, setRepositories }
 ) {
   const response = await api.searchRepository({
-    order: "desc",
-    page: pageCount,
-    perPage: 10,
-    createdAt: "2019-09-12",
-    sort: "stars"
+    ...SEARCH_PARAMS,
+    page: pageCount
   });
   setIsLoadMore(false);
   setPageCount(pageCount + 1);
@@ -121,6 +130,9 @@ async function loadMoreRepository(
 
 const styles = {
   spinnerContainer: css`
+    font-size: 42px;
+  `,
+  errorContainer: css`
     font-size: 42px;
   `,
   repoListContainer: css`
