@@ -1,6 +1,6 @@
 import React from "react";
 import { css } from "emotion";
-import RepositoryList from "./RepositoryList";
+import RepositoryList from "./components/RepositoryList";
 
 function App() {
   return (
