@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { css } from "emotion";
-import { keyframes } from "@emotion/core";
+import { css, keyframes } from "emotion";
 import { useAsync } from "react-async";
 import * as api from "../api";
 
-function RepositoryList() {
+export default function RepositoryList() {
   const [pageCount, setPageCount] = useState(1);
   const [isLoadMore, setIsLoadMore] = useState(false);
   const [repositories, setRepositories] = useState(null);
@@ -266,5 +265,3 @@ const styles = {
     margin-bottom: 40px;
   `
 };
-
-export default RepositoryList;

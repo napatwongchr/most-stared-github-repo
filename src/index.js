@@ -1,23 +1,25 @@
-import React, { Fragment } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { Global } from "@emotion/core";
+import { injectGlobal } from "emotion";
 import App from "./App";
 
+injectGlobal`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-size: 18px;
+    background-color: #F1F3F5;
+    font-family: Arvo, "serif";
+    color: #262626;
+  }
+`;
+
 ReactDOM.render(
-  <Fragment>
-    <Global
-      styles={{
-        body: {
-          margin: 0,
-          padding: 0,
-          fontSize: "18px",
-          backgroundColor: "#F1F3F5",
-          fontFamily: "Arvo, serif",
-          color: "#262626"
-        }
-      }}
-    />
+  <React.StrictMode>
     <App />
-  </Fragment>,
+  </React.StrictMode>,
   document.getElementById("root")
 );

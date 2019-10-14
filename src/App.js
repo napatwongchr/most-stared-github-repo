@@ -6,7 +6,7 @@ function App() {
   return (
     <div className={styles.appContainer}>
       <h1 className={styles.appHeading} data-testid="app-heading">
-        Most{" "}
+        Most
         <span className={styles.hightlightText}>
           &nbsp;starred github&nbsp;
         </span>
@@ -27,7 +27,6 @@ const styles = {
     justify-content: center;
     font-family: "Lobster", cursive;
     margin: 45px 0;
-    color: #262626;
     @media (max-width: 576px) {
       text-align: center;
       display: inline-block;
