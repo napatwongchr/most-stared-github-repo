@@ -1,15 +1,16 @@
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
+
 import React from "react";
-import { css } from "emotion";
 import RepositoryList from "./components/RepositoryList";
+import { upToSmall } from "./media-queries";
 
 function App() {
   return (
-    <div className={styles.appContainer}>
-      <h1 className={styles.appHeading} data-testid="app-heading">
+    <div css={styles.appContainer}>
+      <h1 css={styles.appHeading} data-testid="app-heading">
         Most
-        <span className={styles.hightlightText}>
-          &nbsp;starred github&nbsp;
-        </span>
+        <span css={styles.hightlightText}>&nbsp;starred github&nbsp;</span>
         repositories in 30 days
       </h1>
       <RepositoryList />
@@ -27,7 +28,8 @@ const styles = {
     justify-content: center;
     font-family: "Lobster", cursive;
     margin: 45px 0;
-    @media (max-width: 576px) {
+
+    ${upToSmall} {
       text-align: center;
       display: inline-block;
     }

@@ -11,24 +11,24 @@ exports[`Repository item should contains information 1`] = `
       data-testid="repository-item"
     >
       <div
-        class="css-mr42ks"
+        class="css-4w9ir7"
       >
         <div
-          class="css-o7hb3"
+          class="css-co2vhb"
         >
           <span
-            class="css-mkpm6v"
+            class="css-15cw6xp"
           >
             repo 1
           </span>
           <span
-            class="css-1180py9"
+            class="css-1em29az"
           >
             python
           </span>
         </div>
         <div
-          class="css-1t511r-stats"
+          class="css-172v4as-stats"
         >
           <div
             class="css-1jor1m6-starCount"
@@ -58,7 +58,7 @@ exports[`Repository item should contains information 1`] = `
         </div>
       </div>
       <div
-        class="css-1yuj63e-description"
+        class="css-8tzz8c-description"
       >
         This is desc 1
       </div>
@@ -68,24 +68,24 @@ exports[`Repository item should contains information 1`] = `
       data-testid="repository-item"
     >
       <div
-        class="css-mr42ks"
+        class="css-4w9ir7"
       >
         <div
-          class="css-o7hb3"
+          class="css-co2vhb"
         >
           <span
-            class="css-mkpm6v"
+            class="css-15cw6xp"
           >
             repo 2
           </span>
           <span
-            class="css-1180py9"
+            class="css-1em29az"
           >
             js
           </span>
         </div>
         <div
-          class="css-1t511r-stats"
+          class="css-172v4as-stats"
         >
           <div
             class="css-1jor1m6-starCount"
@@ -115,7 +115,7 @@ exports[`Repository item should contains information 1`] = `
         </div>
       </div>
       <div
-        class="css-1yuj63e-description"
+        class="css-8tzz8c-description"
       >
         This is desc 2
       </div>

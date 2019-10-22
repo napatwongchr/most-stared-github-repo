@@ -1,7 +1,10 @@
+/** @jsx jsx */
+import { css, jsx, keyframes } from "@emotion/core";
+
 import React, { useState, useEffect } from "react";
-import { css, keyframes } from "emotion";
 import { useAsync } from "react-async";
 import * as api from "../api";
+import { upToSmall } from "../media-queries";
 
 export default function RepositoryList() {
   const [pageCount, setPageCount] = useState(1);
@@ -49,62 +52,55 @@ export default function RepositoryList() {
   }
 
   if (isInitializeLoading) {
-    return <div className={styles.spinnerContainer}>Loading ...</div>;
+    return <div css={styles.spinnerContainer}>Loading ...</div>;
   }
 
   if (isInitializeError || isLoadMoreError) {
-    return (
-      <div className={styles.errorContainer}>Error fetching repositories.</div>
-    );
+    return <div css={styles.errorContainer}>Error fetching repositories.</div>;
   }
 
   return (
-    <div className={styles.repoListContainer} data-testid="repository-list">
+    <div css={styles.repoListContainer} data-testid="repository-list">
       {repositories ? (
         repositories.items.map(repository => {
           return (
             <div
               key={repository.id}
-              className={styles.repoItemContainer}
+              css={styles.repoItemContainer}
               data-testid="repository-item"
               onClick={() => window.open(repository.html_url)}
             >
-              <div className={styles.repoHeadingContainer}>
-                <div className={styles.repoHeadingContent}>
-                  <span className={styles.repoName}>{repository.name}</span>
+              <div css={styles.repoHeadingContainer}>
+                <div css={styles.repoHeadingContent}>
+                  <span css={styles.repoName}>{repository.name}</span>
                   {repository.language && (
-                    <span className={styles.repoLanguageTag}>
+                    <span css={styles.repoLanguageTag}>
                       {repository.language}
                     </span>
                   )}
                 </div>
-                <div className={styles.repoStatsContainer}>
-                  <div className={styles.starsCountContianer}>
-                    <span className={styles.starsCountText}>Stars:</span>{" "}
+                <div css={styles.repoStatsContainer}>
+                  <div css={styles.starsCountContianer}>
+                    <span css={styles.starsCountText}>Stars:</span>{" "}
                     <span>{repository.stargazers_count}</span>
                   </div>
-                  <div className={styles.forksCountContainer}>
-                    <span className={styles.forksCountText}>Forks: </span>
+                  <div css={styles.forksCountContainer}>
+                    <span css={styles.forksCountText}>Forks: </span>
                     <span>{repository.forks_count}</span>
                   </div>
                 </div>
               </div>
-              <div className={styles.repoDescContainer}>
-                {repository.description}
-              </div>
+              <div css={styles.repoDescContainer}>{repository.description}</div>
             </div>
           );
         })
       ) : (
-        <div
-          className={styles.noRepositoryContainer}
-          data-testid="no-repository"
-        >
+        <div css={styles.noRepositoryContainer} data-testid="no-repository">
           No repositories.
         </div>
       )}
       {isLoadMoreLoading && (
-        <div className={styles.loadMoreRepositoryContainer}>
+        <div css={styles.loadMoreRepositoryContainer}>
           <span>Loading more repositories...</span>
         </div>
       )}
@@ -202,13 +198,13 @@ const styles = {
   repoHeadingContainer: css`
     display: flex;
     justify-content: space-between;
-    @media (max-width: 576px) {
+    ${upToSmall} {
       display: flex;
       flex-direction: column;
     }
   `,
   repoHeadingContent: css`
-    @media (max-width: 576px) {
+    ${upToSmall} {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -217,7 +213,7 @@ const styles = {
   repoName: css`
     font-weight: bold;
     font-size: 22px;
-    @media (max-width: 576px) {
+    ${upToSmall} {
       text-align: center;
     }
   `,
@@ -227,14 +223,14 @@ const styles = {
     margin-left: 5px;
     border-radius: 6px;
     color: #ffffff;
-    @media (max-width: 576px) {
+    ${upToSmall} {
       margin-top: 20px;
     }
   `,
   repoStatsContainer: css`
     label: stats;
     display: flex;
-    @media (max-width: 576px) {
+    ${upToSmall} {
       justify-content: center;
       margin-top: 30px;
     }
@@ -255,7 +251,7 @@ const styles = {
   repoDescContainer: css`
     label: description;
     margin-top: 30px;
-    @media (max-width: 576px) {
+    ${upToSmall} {
       text-align: center;
     }
   `,
