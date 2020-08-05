@@ -96,12 +96,7 @@ export default function RepositoryList() {
           );
         })
       ) : (
-        <div
-          className={styles.noRepositoryContainer}
-          data-testid="no-repository"
-        >
-          No repositories.
-        </div>
+        <div className={styles.noRepositoryContainer}>No repositories.</div>
       )}
       {isLoadMoreLoading && (
         <div className={styles.loadMoreRepositoryContainer}>
