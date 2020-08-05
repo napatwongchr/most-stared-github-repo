@@ -1,9 +1,18 @@
 import React from "react";
-import { render, cleanup, wait, fireEvent } from "@testing-library/react";
+import {
+  render,
+  cleanup,
+  waitFor,
+  screen,
+  fireEvent
+} from "@testing-library/react";
 import RepositoryList from "../RepositoryList";
 import * as api from "../../api";
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  jest.clearAllMocks();
+});
 
 test("Repository list should render properly", async () => {
   const apiCall = jest
@@ -15,12 +24,14 @@ test("Repository list should render properly", async () => {
         }
       });
     });
-  const { getByTestId, container } = render(<RepositoryList />);
-  expect(apiCall).toHaveBeenCalledTimes(1);
-  await wait(expect(container).toHaveTextContent(/loading/i));
+
+  const { getByTestId } = render(<RepositoryList />);
+
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  await waitFor(() => expect(apiCall).toHaveBeenCalledTimes(1));
+
   expect(getByTestId("repository-list")).toBeInTheDocument();
   expect(getByTestId("repository-list").childNodes.length).toBe(2);
-  apiCall.mockClear();
 });
 
 test("Repository list should show 'No repository found.' when no repository result", async () => {
@@ -31,11 +42,14 @@ test("Repository list should show 'No repository found.' when no repository resu
         data: null
       });
     });
-  const { getByTestId, container } = render(<RepositoryList />);
-  expect(apiCall).toHaveBeenCalledTimes(1);
-  await wait(expect(container).toHaveTextContent(/loading/i));
-  expect(getByTestId("no-repository")).toHaveTextContent("No repositories");
-  apiCall.mockClear();
+
+  render(<RepositoryList />);
+
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+
+  await waitFor(() => expect(apiCall).toHaveBeenCalledTimes(1));
+
+  expect(screen.getByText(/no repositories./i)).toBeInTheDocument();
 });
 
 test("Repository list should show 'Error fetching repositories.' when error occured", async () => {
@@ -44,12 +58,12 @@ test("Repository list should show 'Error fetching repositories.' when error occu
     .mockImplementationOnce(() => {
       return Promise.reject("error");
     });
-  const { container } = render(<RepositoryList />);
-  expect(apiCall).toHaveBeenCalledTimes(1);
 
-  await wait(expect(container).toHaveTextContent(/loading/i));
-  expect(container).toHaveTextContent(/error fetching repositories./i);
-  apiCall.mockClear();
+  render(<RepositoryList />);
+
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  await waitFor(() => expect(apiCall).toHaveBeenCalledTimes(1));
+  expect(screen.getByText(/error fetching repositories./i)).toBeInTheDocument();
 });
 
 test("Repository list should fetch when scroll to the end", async () => {
@@ -61,18 +75,18 @@ test("Repository list should fetch when scroll to the end", async () => {
       }
     });
   });
-  const { getByTestId, container } = render(<RepositoryList />);
-  expect(apiCall).toHaveBeenCalledTimes(1);
-  await wait(expect(container).toHaveTextContent(/loading/i));
+  const { getByTestId } = render(<RepositoryList />);
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  await waitFor(() => expect(apiCall).toHaveBeenCalledTimes(1));
+
   fireEvent.scroll(window, {
     target: { scrollingElement: { scrollTop: 1000, offsetHeight: 1768 } }
   });
-  await wait(
-    expect(container).toHaveTextContent(/Loading more repositories.../i)
-  );
-  expect(apiCall).toHaveBeenCalledTimes(2);
+
+  expect(screen.getByText(/Loading more repositories.../i)).toBeInTheDocument();
+  await waitFor(() => expect(apiCall).toHaveBeenCalledTimes(2));
+
   expect(getByTestId("repository-list").childNodes.length).toBe(4);
-  apiCall.mockClear();
 });
 
 test("Repository item should contains information", async () => {
@@ -100,9 +114,9 @@ test("Repository item should contains information", async () => {
       }
     });
   });
-  const { container } = render(<RepositoryList />);
-  expect(apiCall).toHaveBeenCalledTimes(1);
-  await wait(expect(container).toHaveTextContent(/loading/i));
-  expect(container).toMatchSnapshot();
-  apiCall.mockClear();
+  const { asFragment } = render(<RepositoryList />);
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  await waitFor(() => expect(apiCall).toHaveBeenCalledTimes(1));
+  const firstRender = asFragment();
+  expect(firstRender).toMatchSnapshot();
 });
